@@ -1,5 +1,5 @@
 import { Controller, Get, Post, Patch, Delete, Param, NotFoundException, BadRequestException, Request, Res, Query, UseInterceptors, UploadedFiles, UploadedFile } from '@nestjs/common';
-import { FilesInterceptor } from '@nestjs/platform-express';
+import { FilesInterceptor, FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer'
 import { ApiTags, ApiBody, ApiResponse, ApiConsumes } from '@nestjs/swagger';
 
@@ -77,8 +77,20 @@ export class UserPicturesController {
   }
 
   @Patch(':id')
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        file: {
+          type: 'string',
+          format: 'binary'
+        }
+      }
+    }
+  })
   @ApiResponse({ status: 200, type: SuccessDto })
-  @UseInterceptors(FilesInterceptor('image', 20, {
+  @UseInterceptors(FileInterceptor('image', {
     storage: diskStorage({
       destination: UPLOAD_FOLDER,
       filename: editFileName
