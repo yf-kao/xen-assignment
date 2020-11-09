@@ -1,5 +1,5 @@
-import { Controller, Get, Post, Patch, Delete, Param, NotFoundException, BadRequestException, Request, Res, Query, UseInterceptors, UploadedFiles, UploadedFile } from '@nestjs/common';
-import { ApiTags, ApiBody, ApiResponse, ApiConsumes } from '@nestjs/swagger';
+import { Controller, Get, Delete, Param, NotFoundException, Res, Query } from '@nestjs/common';
+import { ApiTags, ApiResponse } from '@nestjs/swagger';
 
 import { unlinkSync } from 'fs'
 
