@@ -4,6 +4,16 @@
 
 # Rest API
 
+* For simplicity, I made some assumptions: 
+    1. Delete user will not delete pictures under this user. In many system it can have a service to check and clear those pictures.(Garbage Collection)
+
+    2. No forign key between picture and user table.
+    3. Picture will upload and store on local folder. In practice it should be upload to distributed storage like s3.
+    4. No 2nd index for filter. In practice we should have indexes base on the query patten.
+    5. No authentication. No token to check user can upload picture or not.(Non exists user can upload picture)
+    6. No unit test.
+
+
 ## Installation
 
 ```bash
@@ -105,7 +115,7 @@ Get all users.
 ]
 ```
 
-#### 3. get user by ID
+#### 3. get user by user ID
 ##### Get /users/{id}
 
 Get a user by userId
@@ -121,7 +131,7 @@ Get a user by userId
 }
 ```
 
-#### 4. Update user by ID
+#### 4. Update user by user ID
 ##### PATCH /users/{id}
 
 Update user info by userId.
@@ -149,15 +159,10 @@ Update user info by userId.
 }
 ```
 
-#### 5. delete user by ID
+#### 5. delete user by user ID
 ##### DELETE /users/{id}
 
 Delete user by userId.
-
-* Assumptions: 
-The API will not delete the pictures under this user.
-It will take long time to wait the deletion finish.
-The better solution is have a service to check and clear unused pictures.
 
 * response
 ``` json
@@ -194,7 +199,7 @@ Get all pictures info on system
 ]
 ```
 
-#### 2. get pictures by ID
+#### 2. get pictures by picture ID
 ##### GET /pictures/{id}
 
 Get picture info by pictureId.
@@ -211,7 +216,7 @@ Get picture info by pictureId.
 }
 ```
 
-#### 3. delete picture by ID
+#### 3. delete picture by picture ID
 ##### DELETE /pictures/{id}
 
 Delete picture by pictureId.
@@ -272,7 +277,7 @@ Get all pictures info by userId
 ]
 ```
 
-#### 2. get pictures by user ID and ID
+#### 6. get pictures by user ID and picture ID
 ##### GET /users/{userId}/pictures/{pictureId}
 
 Get picture info by userId and pictureId.
@@ -289,7 +294,7 @@ Get picture info by userId and pictureId.
 }
 ```
 
-#### 4. Reupload picture by user ID and ID
+#### 7. Reupload picture by user ID and picture ID
 ##### PATCH /users/{userId}/pictures/{pictureId}
 
 Reupload picture
@@ -305,7 +310,7 @@ multipart media type
 }
 ```
 
-#### 5. delete picture by user ID and ID
+#### 8. delete picture by user ID and picture ID
 ##### DELETE /users/{userId}/pictures/{pictureId}
 
 Delete picture by userId and pictureId.
