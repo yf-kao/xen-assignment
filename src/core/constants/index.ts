@@ -4,4 +4,4 @@ export const TEST = 'test';
 export const PRODUCTION = 'production';
 export const USER_REPOSITORY = 'USER_REPOSITORY';
 export const PICTURE_REPOSITORY = 'PICTURE_REPOSITORY';
-export const UPLOAD_FOLDER = 'src/files';
+export const UPLOAD_FOLDER = 'upload';

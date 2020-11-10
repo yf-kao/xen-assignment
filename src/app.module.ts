@@ -6,6 +6,8 @@ import { DatabaseModule } from './core/database/database.module';
 import { UsersModule } from './modules/users/users.module';
 import { PicturesModule } from './modules/pictures/pictures.module';
 
+import { UPLOAD_FOLDER } from './core/constants';
+
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -14,7 +16,7 @@ import { PicturesModule } from './modules/pictures/pictures.module';
     PicturesModule,
     MulterModule.registerAsync({
       useFactory: () => ({
-        dest: 'src/files',
+        dest: UPLOAD_FOLDER,
       }),
     })
   ]
